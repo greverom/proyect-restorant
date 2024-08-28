@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { MesasService } from '../../services/mesas.service';
 
 
 
@@ -26,10 +27,12 @@ export class ComidaManagerComponent {
     descripcion: '',
     cantidadDisponible: 0
   };
+  mesaCantidad: number = 10;
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
   constructor(private alimentosService: AlimentosService,
+              private mesasService: MesasService,
                private router: Router
   ) {}
 
@@ -45,7 +48,18 @@ export class ComidaManagerComponent {
     }
   }
 
-
+ // Método para crear mesas
+ crearMesas() {
+  this.mesasService.crearMesasIniciales(this.mesaCantidad)
+    .then(() => {
+      this.mostrarSwal('success', `${this.mesaCantidad} mesas creadas exitosamente`);
+      this.resetMesaForm();
+    })
+    .catch(error => {
+      this.mostrarSwal('error', 'Error al crear mesas');
+      console.error('Error al crear mesas:', error);
+    });
+}
   guardarAlimento() {
     if (this.selectedFile) {
       // Subir la imagen y guardar el producto
@@ -86,7 +100,11 @@ export class ComidaManagerComponent {
       descripcion: '',
       cantidadDisponible: 0
     };
-    this.selectedFile = null;  // Reinicia la selección de archivo
+    this.selectedFile = null;
+  }
+
+  resetMesaForm() {
+    this.mesaCantidad = 10; // Reinicia la cantidad de mesas
   }
 
   navigateToEditProduct() {

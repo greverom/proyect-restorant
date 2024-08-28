@@ -1,0 +1,32 @@
+.mesas-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .mesas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .mesa-card {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .mesa-card:hover {
+    background-color: #ddd;
+  }
+  
+  .capacidad-form {
+    margin-top: 20px;
+  }
+  
+  input[type="number"] {
+    margin-right: 10px;
+  }

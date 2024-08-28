@@ -1,0 +1,6 @@
+<div class="product-container">
+    <div *ngFor="let alimento of alimentos" class="product-card">
+      <img [src]="alimento.imagenUrl" alt="{{ alimento.nombre  }}" class="product-image">
+      <div class="product-name">{{ alimento.nombre | titlecase }}</div>
+    </div>
+  </div>

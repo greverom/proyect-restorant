@@ -64,3 +64,21 @@
     </div>
   </div>
 </div>
+
+<!-- Nuevo Formulario para Crear Mesas -->
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Crear Mesas</h2>
+    </div>
+    <div class="form-body">
+      <form (ngSubmit)="crearMesas()">
+        <div class="form-group">
+          <label for="mesaCantidad">Cantidad de Mesas</label>
+          <input type="number" id="mesaCantidad" [(ngModel)]="mesaCantidad" name="mesaCantidad" required>
+        </div>
+        <button type="submit" class="submit-btn" disabled="true">Crear Mesas</button>
+      </form>
+    </div>
+  </div>
+</div>

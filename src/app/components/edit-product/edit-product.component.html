@@ -8,7 +8,7 @@
             <div class="product-name">{{ producto.nombre }}</div>
             <div class="product-description">{{ producto.descripcion }}</div>
             <div class="price-quantity-container">
-              <div class="product-price">{{ producto.precio | currency:'USD':true }}"</div>
+              <div class="product-price">{{ producto.precio | currency }}"</div>
               <div class="product-quantity">Quedan: {{ producto.cantidadDisponible }}</div>
             </div>
           </div>

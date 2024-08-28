@@ -21,8 +21,8 @@ export class MenuRestorantComponent implements OnInit {
     'Rollos de canela', 
     'Platos de comida', 
     'Sopas', 
-    'Bebidas alcohólicas', 
-    'Bebidas no alcohólicas'
+    'Bebidas alcoholicas', 
+    'Bebidas no alcoholicas'
   ];
 
   constructor(private alimentosService: AlimentosService,
@@ -38,11 +38,10 @@ export class MenuRestorantComponent implements OnInit {
   }
 
   cargarAlimentos() {
-    const categorias = ['Postres', 'Cakes', 'Rollos de canela', 'Platos de comida', 'Sopas', 'Bebidas alcohólicas', 'Bebidas no alcohólicas'];
+    const categorias = ['Postres', 'Cakes', 'Rollos de canela', 'Platos de comida', 'Sopas', 'Bebidas alcoholicas', 'Bebidas no alcoholicas'];
     
     categorias.forEach(categoria => {
       this.alimentosService.obtenerAlimentos(categoria).subscribe((data: Alimento[]) => {
-        console.log(`Alimentos en la categoría ${categoria}:`, data);
         this.alimentos.push(...data); // Almacenar los alimentos en la variable alimentos si es necesario
       });
     });

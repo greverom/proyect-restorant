@@ -1,0 +1,20 @@
+
+.navbar {
+  padding: 20px;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 30px;
+}
+
+.navbar-nav .dropdown-menu {
+  min-width: 200px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  border: none;
+}
