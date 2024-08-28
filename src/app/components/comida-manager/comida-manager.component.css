@@ -1,0 +1,178 @@
+/* Contenedor principal que centra la tarjeta en la pantalla */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px 10px;
+    background-color: #f6f6f6; /* Fondo neutro */
+  }
+  
+  /* Tarjeta que contiene el formulario */
+  .form-card {
+    width: 100%;
+    max-width: 600px; /* Tarjeta más ancha */
+    background-color: #dad7d7;
+    padding: 50px 45px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título del formulario */
+  .form-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  
+  /* Grupos de formulario con espacio entre cada uno */
+  .form-group {
+    margin-bottom: 2rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; /* Los inputs, selects y textarea ocupan todo el ancho del contenedor */
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #b1b1b1;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo para el botón de envío */
+  .submit-btn {
+    width: 100%; /* Botón ocupa todo el ancho */
+    padding: 12px;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Clase personalizada para ajustar el estilo del swal */
+.swal2-centered-popup {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Agrega sombra a la alerta */
+  padding: 20px; /* Ajusta el padding para que sea más espacioso */
+  border-radius: 10px; /* Bordes redondeados */
+  max-width: 400px; /* Limita el ancho máximo */
+}
+
+/* Estilo para el contenedor del input de archivo */
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.custom-file-input input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.custom-file-input label {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-file-input label:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para la vista previa de la imagen */
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+/* Estilo del botón de subir imagen */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:enabled {
+  background-color: #218838;
+}
+
+.header {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.edit-product-btn {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-product-btn:hover {
+  background-color: #0056b3;
+}
+
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .form-card {
+      padding: 20px;
+    }
+  
+    .submit-btn {
+      font-size: 16px;
+      padding: 10px;
+    }
+  }
+  

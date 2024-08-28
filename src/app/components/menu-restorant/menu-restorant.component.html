@@ -1,0 +1,18 @@
+<div class="menu-container">
+    <h1 class="menu-title">Menú de la Casa</h1>
+    
+    <header class="menu-header">
+      <button 
+        class="category-btn" 
+        *ngFor="let categoria of categorias"
+        (click)="navigateToCategory(categoria)"> <!-- Evento click para navegar -->
+        {{ categoria }}
+      </button>
+    </header>
+  
+    <!-- Contenedor para las rutas hijas -->
+    <div class="menu-content">
+      <router-outlet></router-outlet> <!-- Aquí se mostrarán las categorías seleccionadas -->
+    </div>
+  </div>
+  

@@ -1,0 +1,294 @@
+/* Contenedor principal */
+.edit-product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Sección de cada categoría */
+  .categoria-section {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .categoria-section h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Estilo de la tarjeta del producto */
+  .product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+  
+  /* Estilo de la imagen del producto */
+  .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilo del nombre del producto */
+  .product-card .product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Estilo de la descripción del producto */
+  .product-card .product-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Estilo del precio del producto */
+  .product-card .product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo de la cantidad disponible */
+  .product-card .product-quantity {
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+  }
+  
+  /* Estilo del contenedor del precio y cantidad para alinearlos */
+  .product-card .price-quantity-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Estilos del contenedor del producto */
+.edit-product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Sección de cada categoría */
+  .categoria-section {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .categoria-section h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Estilo de la tarjeta del producto */
+  .product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  /* Estilo general del modal */
+  .modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Permitir que el modal sea desplazable */
+    padding: 20px; /* Añadir un poco de espacio alrededor del modal */
+  }
+  
+  .modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 90%; /* Limitar la altura máxima del modal */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Hacer que el contenido interno sea desplazable */
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los elementos del formulario */
+  }
+  
+  .modal-body img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .form-group input[type="file"] {
+    padding: 5px;
+  }
+  
+  .form-group img {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  button.btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  button.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+
+  /* Estilo para que el input de archivo parezca un botón */
+.custom-file-input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .custom-file-input input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .custom-file-input label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .custom-file-input label:hover {
+    opacity: 0.9;
+  }
+  
+  /* Estilo para la vista previa de la imagen */
+  .image-preview img {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-body img {
+    width: 100%;
+    height: auto;
+    max-width: 200px; /* Limitar el ancho máximo de la imagen */
+    max-height: 200px; /* Limitar la altura máxima de la imagen */
+    border-radius: 10px;
+    margin: 10px auto; /* Centrar horizontalmente con auto y agregar espacio alrededor */
+    display: block; /* Asegurar que la imagen se comporte como un bloque */
+    object-fit: contain; /* Ajustar la imagen dentro de su contenedor */
+  }
+
+  .btn-delete-image {
+    display: block;
+    margin: 5px auto; /* Centrar el botón debajo de la imagen */
+    background-color: #dc3545; /* Color rojo para el botón de eliminar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .btn-delete-image:hover {
+    background-color: #c82333; /* Color más oscuro en hover */
+  }
+  
+  

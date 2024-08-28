@@ -1,0 +1,66 @@
+<div class="header">
+  <button class="edit-product-btn" (click)="navigateToEditProduct()">Editar Producto</button>
+</div>
+
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Gestión de Alimentos</h2>
+    </div>
+    <div class="form-body">
+      <form (ngSubmit)="guardarAlimento()">
+        <div class="form-group">
+          <label for="nombre">Nombre del producto</label>
+          <input type="text" id="nombre" [(ngModel)]="alimento.nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" [(ngModel)]="alimento.categoria" name="categoria" required>
+            <option value="Postres">Postres</option>
+            <option value="Cakes">Cakes</option>
+            <option value="Rollos de canela">Rollos de canela</option>
+            <option value="Platos de comida">Platos de comida</option>
+            <option value="Sopas">Sopas</option>
+            <option value="Bebidas alcohólicas">Bebidas alcohólicas</option>
+            <option value="Bebidas no alcohólicas">Bebidas no alcohólicas</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="precio">Precio</label>
+          <input type="number" id="precio" [(ngModel)]="alimento.precio" name="precio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" [(ngModel)]="alimento.descripcion" name="descripcion" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cantidadDisponible">Cantidad Disponible</label>
+          <input type="number" id="cantidadDisponible" [(ngModel)]="alimento.cantidadDisponible" name="cantidadDisponible" required>
+        </div>
+
+        <!-- Input personalizado para cargar la imagen -->
+        <div class="form-group">
+          <label for="imagen">Imagen del Producto</label>
+          
+          <!-- Input que parece un botón -->
+          <div class="custom-file-input">
+            <input type="file" id="imagen" (change)="onFileSelected($event)" accept="image/*">
+            <label for="imagen">Cargar Imagen</label>
+          </div>
+
+          <!-- Vista previa de la imagen seleccionada -->
+          <div *ngIf="previewUrl" class="image-preview">
+            <img [src]="previewUrl" alt="Vista previa de la imagen" />
+          </div>
+
+        </div>
+
+        <button type="submit" class="submit-btn">Guardar Alimento</button>
+      </form>
+    </div>
+  </div>
+</div>
