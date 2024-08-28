@@ -3,7 +3,8 @@ export interface Mesa {
     numero: number;
     estado: 'disponible' | 'ocupada';
     capacidad: number;
-    pedidoGeneral: Pedido;  
+    pedidoGeneral: Pedido; 
+    asignadaPor?: string;
   }
 
   export interface Pedido {

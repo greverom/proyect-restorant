@@ -2,16 +2,24 @@
     <h1>Gestión de Mesas</h1>
   
     <div class="mesas-list">
-      <div *ngFor="let mesa of mesas" class="mesa-card" (click)="seleccionarMesa(mesa.id)">
+      <div 
+        *ngFor="let mesa of mesas" 
+        class="mesa-card" 
+        [ngClass]="{ 'ocupada': mesa.estado === 'ocupada', 'disponible': mesa.estado === 'disponible' }"
+        (click)="mesa.estado === 'disponible' ? seleccionarMesa(mesa.id) : null"
+        [class.disabled]="mesa.estado === 'ocupada'"
+      >
         <h2>Mesa {{ mesa.numero }}</h2>
         <p>Estado: {{ mesa.estado }}</p>
         <p>Capacidad: {{ mesa.capacidad || 'No asignada' }}</p>
+        <p *ngIf="mesa.asignadaPor">Asignada por: {{ mesa.asignadaPor || 'No asignada' }}</p>
       </div>
     </div>
   
     <div *ngIf="mesaSeleccionada" class="capacidad-form">
-      <h3>Asignar Capacidad a la Mesa {{ mesaSeleccionada.numero }}</h3>
-      <input type="number" [(ngModel)]="capacidadSeleccionada" placeholder="Número de personas" />
-      <button (click)="confirmarCapacidad()">Confirmar Capacidad</button>
-    </div>
+        <h3>Asignar Capacidad y Empleado a la Mesa {{ mesaSeleccionada.numero }}</h3>
+        <input type="number" [(ngModel)]="capacidadSeleccionada" placeholder="Número de personas" />
+        <input type="text" [(ngModel)]="empleadoAsignado" placeholder="Nombre del empleado" />
+        <button (click)="confirmarAsignacion()">Confirmar Asignación</button>
+      </div>
   </div>

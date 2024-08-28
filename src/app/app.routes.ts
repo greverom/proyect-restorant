@@ -4,6 +4,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { menuRestorantRoutes } from './components/menu-restorant/menu-routes';
 import { ComidaManagerComponent } from './components/comida-manager/comida-manager.component';
 import { MesasComponent } from './components/mesas/mesas.component';
+import { MesasOcupadasComponent } from './components/mesas-ocupadas/mesas-ocupadas.component';
 
 
 
@@ -17,6 +18,7 @@ export const routes: Route[] = [
     children: menuRestorantRoutes  
   },
   { path: 'mesas', component: MesasComponent },  // Asegúrate de que la ruta esté usando MesasComponent
+  { path: 'mesas-ocupadas', component: MesasOcupadasComponent },
   { path: '', redirectTo: 'comida-manager', pathMatch: 'full' },  
   { path: '**', redirectTo: 'comida-manager', pathMatch: 'full' }
 ];

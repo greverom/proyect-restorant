@@ -18,10 +18,30 @@
     cursor: pointer;
     text-align: center;
   }
-  
-  .mesa-card:hover {
-    background-color: #ddd;
+
+  .mesa-card.ocupada {
+    background-color: #f8d7da; /* Color rojo claro para mesas ocupadas */
+    cursor: not-allowed; /* Cambiar el cursor para indicar que no se puede hacer clic */
   }
+  
+  .mesa-card.disponible {
+    background-color: #d4edda; /* Color verde claro para mesas disponibles */
+    cursor: pointer; /* Cambiar el cursor a pointer para indicar que se puede hacer clic */
+  }
+  
+  .mesa-card.disabled {
+    background-color: #ffaeb5;
+    pointer-events: none; /* Deshabilita todos los eventos de clic */
+    opacity: 0.6; /* Opcional: reduce la opacidad para dar la apariencia de estar deshabilitado */
+  }
+  
+  .mesa-car.ocupada:hover {
+    background-color: #ffaeb5; /* Rojo bajito */
+  }
+  .mesa-card.disponible:hover {
+    background-color: #a0f9b5; /* Verde bajito */
+  }
+
   
   .capacidad-form {
     margin-top: 20px;
@@ -29,4 +49,44 @@
   
   input[type="number"] {
     margin-right: 10px;
+  }
+  .mesas-container {
+    padding: 20px;
+  }
+  
+  .mesas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+
+  .mesa-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .capacidad-form {
+    margin-top: 20px;
+  }
+  
+  .capacidad-form input {
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .capacidad-form button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .capacidad-form button:hover {
+    background-color: #0056b3;
   }

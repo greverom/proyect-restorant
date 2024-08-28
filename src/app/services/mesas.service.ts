@@ -49,16 +49,20 @@ export class MesasService {
   }
 
    // Método para cambiar el estado de una mesa
-  cambiarEstadoMesa(mesaId: string, estado: 'disponible' | 'ocupada', capacidad?: number): Promise<void> {
+   cambiarEstadoMesa(mesaId: string, estado: 'disponible' | 'ocupada', capacidad?: number, empleadoAsignado?: string): Promise<void> {
     const mesaRef = ref(this.db, `mesas/${mesaId}`);
     const updates: Partial<Mesa> = { estado };
-    
-    if (capacidad !== undefined) {
+  
+    if (estado === 'ocupada' && capacidad !== undefined && empleadoAsignado) {
       updates.capacidad = capacidad;
+      updates.asignadaPor = empleadoAsignado;
+    } else if (estado === 'disponible') {
+      updates.capacidad = 0;
+      updates.asignadaPor = ''; // O puedes eliminar esta propiedad si prefieres
     }
-
+  
     return update(mesaRef, updates)
-      .then(() => console.log(`Estado de la mesa ${mesaId} actualizado a ${estado} con capacidad de ${capacidad || 'sin cambios'} personas.`))
+      .then(() => console.log(`Mesa ${mesaId} actualizada a ${estado}.`))
       .catch(error => console.error('Error al actualizar el estado de la mesa:', error));
   }
 
