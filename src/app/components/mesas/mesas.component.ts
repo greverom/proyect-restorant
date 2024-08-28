@@ -51,4 +51,10 @@ export class MesasComponent implements OnInit {
         .catch(error => console.error('Error al asignar la mesa:', error));
     }
   }
+
+  cancelarAsignacion() {
+    this.mesaSeleccionada = null;  // Desselecciona la mesa
+    this.capacidadSeleccionada = null;  // Resetea la capacidad seleccionada
+    this.empleadoAsignado = '';  // Resetea el nombre del empleado
+  }
 }

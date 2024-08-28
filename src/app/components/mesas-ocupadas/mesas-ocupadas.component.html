@@ -1,12 +1,25 @@
-<div class="mesas-ocupadas-container">
+<div class="ocupadas-container">
     <h1>Mesas Ocupadas</h1>
-  
+    
     <div class="mesas-list">
       <div *ngFor="let mesa of mesasOcupadas" class="mesa-card">
         <h2>Mesa {{ mesa.numero }}</h2>
-        <p>Capacidad: {{ mesa.capacidad }} personas</p>
-        <p>Estado: {{ mesa.estado }}</p>
-        <button class="desocupar-btn" (click)="desocuparMesa(mesa.id)">Desocupar Mesa</button>
+        <div class="pedido-list">
+          <h3>Pedidos:</h3>
+          <ul>
+            <li *ngFor="let producto of mesa.pedidoGeneral.productos">
+              {{ producto.nombre }} - {{ producto.cantidad }} x {{ producto.precio | currency:'USD':true }}
+            </li>
+          </ul>
+        </div>
+        <div class="total">
+          <h3>Total:</h3>
+          <p>{{ mesa.pedidoGeneral.total | currency:'USD':true }}</p>
+        </div>
+        <div class="mesa-card-buttons">
+          <button class="btn-pagar" (click)="pagarPedido(mesa.id)">Pagar</button>
+          <button class="btn-desocupar" (click)="desocuparMesa(mesa.id)">Desocupar</button>
+        </div>
       </div>
     </div>
   </div>

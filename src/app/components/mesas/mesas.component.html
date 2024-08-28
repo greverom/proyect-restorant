@@ -17,9 +17,20 @@
     </div>
   
     <div *ngIf="mesaSeleccionada" class="capacidad-form">
-        <h3>Asignar Capacidad y Empleado a la Mesa {{ mesaSeleccionada.numero }}</h3>
-        <input type="number" [(ngModel)]="capacidadSeleccionada" placeholder="Número de personas" />
-        <input type="text" [(ngModel)]="empleadoAsignado" placeholder="Nombre del empleado" />
-        <button (click)="confirmarAsignacion()">Confirmar Asignación</button>
+        <div class="form-block">
+          <h2>Asignación de Mesas</h2>
+        </div>
+        <div class="form-block">
+          <label for="capacidad">Cantidad de Personas:</label>
+          <input id="capacidad" type="number" [(ngModel)]="capacidadSeleccionada" placeholder="Número de personas" />
+        </div>
+        <div class="form-block">
+          <label for="empleado">Asignado por:</label>
+          <input id="empleado" type="text" [(ngModel)]="empleadoAsignado" placeholder="Nombre del empleado" />
+        </div>
+        <div class="form-buttons">
+          <button (click)="confirmarAsignacion()">Confirmar Asignación</button>
+          <button (click)="cancelarAsignacion()">Cancelar</button>
+        </div>
       </div>
   </div>

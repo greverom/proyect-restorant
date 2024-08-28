@@ -26,9 +26,12 @@ export class MesasOcupadasComponent implements OnInit {
       this.mesasOcupadas = mesas.filter(mesa => mesa.estado === 'ocupada');
     });
   }
+  pagarPedido(mesaId: string) {
+
+  }
 
   desocuparMesa(mesaId: string) {
-    this.mesasService.cambiarEstadoMesa(mesaId, 'disponible')
+    this.mesasService.cambiarEstadoMesa(mesaId, 'disponible', 0, '')
       .then(() => {
         this.cargarMesasOcupadas(); 
       })
