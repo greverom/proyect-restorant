@@ -1,7 +1,7 @@
 export interface Alimento {
-    id?: string;  // Opcional, en caso de que quieras manejar IDs generados por Firestore
+    id?: string;  
     nombre: string;
-    categoria: string;  // Ejemplo: 'postres', 'cake', 'rollos', etc.
+    categoria: string;  
     precio: number;
     descripcion: string;
     cantidadDisponible: number;
