@@ -9,8 +9,14 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/mesas" routerLinkActive="active">Mesas</a> <!-- Enlace directo a /mesas -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="mesasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mesas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="mesasDropdown">
+            <li><a class="dropdown-item" routerLink="/mesas" routerLinkActive="router-link-active">Disponibles</a></li>
+            <li><a class="dropdown-item" routerLink="/mesas-ocupadas" routerLinkActive="router-link-active">Ocupadas</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="opcionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

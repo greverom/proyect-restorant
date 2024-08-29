@@ -1,6 +1,12 @@
 <div class="product-container">
-    <div *ngFor="let alimento of alimentos" class="product-card">
-      <img [src]="alimento.imagenUrl" alt="{{ alimento.nombre  }}" class="product-image">
-      <div class="product-name">{{ alimento.nombre | titlecase }}</div>
-    </div>
+  <div *ngFor="let alimento of alimentos" class="product-card">
+    <img [src]="alimento.imagenUrl" alt="{{ alimento.nombre }}" class="product-image">
+    <div class="product-name">{{ alimento.nombre | titlecase }}</div>
+    <button 
+      *ngIf="mesaId" 
+      class="add-button" 
+      (click)="agregarProducto(alimento)">
+      Agregar
+    </button>
   </div>
+</div>

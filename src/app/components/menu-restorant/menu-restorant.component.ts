@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Alimento } from '../../models/alimento';
 import { AlimentosService } from '../../services/alimentos.service';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-menu-restorant',
@@ -24,17 +24,24 @@ export class MenuRestorantComponent implements OnInit {
     'Bebidas alcoholicas', 
     'Bebidas no alcoholicas'
   ];
+  mesaId: string | null = null;
 
   constructor(private alimentosService: AlimentosService,
-               private router: Router) {}
+               private router: Router,
+               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      this.mesaId = params.get('mesaId');
+      console.log('ID de la mesa seleccionada:', this.mesaId);
+    });
+
     this.cargarAlimentos();
   }
 
   navigateToCategory(categoria: string) {
     const route = categoria.toLowerCase().replace(/ /g, '-');
-    this.router.navigate([`/menu-restorant/${route}`]);
+    this.router.navigate([`/menu-restorant/${route}`], { queryParams: { mesaId: this.mesaId } });
   }
 
   cargarAlimentos() {

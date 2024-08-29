@@ -4,17 +4,19 @@
     <div class="mesas-list">
       <div *ngFor="let mesa of mesasOcupadas" class="mesa-card">
         <h2>Mesa {{ mesa.numero }}</h2>
+        <button class="add-product-btn" (click)="navigateToMenu(mesa.id)">Agregar Producto</button>
+  
         <div class="pedido-list">
           <h3>Pedidos:</h3>
           <ul>
             <li *ngFor="let producto of mesa.pedidoGeneral.productos">
-              {{ producto.nombre }} - {{ producto.cantidad }} x {{ producto.precio | currency:'USD':true }}
+              {{ producto.cantidad }}x {{ producto.nombre | titlecase }} - {{ producto.precio | currency }}
             </li>
           </ul>
         </div>
         <div class="total">
           <h3>Total:</h3>
-          <p>{{ mesa.pedidoGeneral.total | currency:'USD':true }}</p>
+          <p>{{ mesa.pedidoGeneral.total | currency }}</p>
         </div>
         <div class="mesa-card-buttons">
           <button class="btn-pagar" (click)="pagarPedido(mesa.id)">Pagar</button>

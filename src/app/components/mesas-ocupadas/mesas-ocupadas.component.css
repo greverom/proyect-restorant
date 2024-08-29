@@ -36,6 +36,22 @@
     font-size: 1.2em;
     margin-bottom: 10px;
   }
+
+  .add-product-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-bottom: 15px; /* Espacio debajo del botón */
+    transition: background-color 0.3s;
+  }
+  
+  .add-product-btn:hover {
+    background-color: #45a049;
+  }
   
   .pedido-list ul {
     list-style-type: none;
