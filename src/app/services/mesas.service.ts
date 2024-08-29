@@ -93,16 +93,8 @@ cambiarEstadoMesa(mesaId: string, estado: 'disponible' | 'ocupada', capacidad?: 
             mesa.pedidoGeneral.productos = [];
           }
 
-          // Busca si el producto ya está en la lista
-          const productoExistente = mesa.pedidoGeneral.productos.find(p => p.id === producto.id);
-
-          if (productoExistente) {
-            // Si el producto ya existe, aumenta la cantidad
-            productoExistente.cantidad += producto.cantidad;
-          } else {
-            // Si no existe, agrega el nuevo producto
-            mesa.pedidoGeneral.productos.push(producto);
-          }
+          // Agrega el producto como una nueva entrada
+          mesa.pedidoGeneral.productos.push(producto);
 
           // Actualiza el total
           mesa.pedidoGeneral.total += producto.precio * producto.cantidad;
@@ -126,5 +118,31 @@ cambiarEstadoMesa(mesaId: string, estado: 'disponible' | 'ocupada', capacidad?: 
     return update(pedidoRef, { total })
       .then(() => console.log('Total del pedido actualizado exitosamente'))
       .catch(error => console.error('Error al actualizar el total del pedido:', error));
+  }
+
+   // Método para eliminar un producto del pedido general de una mesa
+   eliminarProductoDePedido(mesaId: string, productoIndex: number): Promise<void> {
+    const mesaRef = ref(this.db, `mesas/${mesaId}`);
+    return new Promise((resolve, reject) => {
+      onValue(mesaRef, snapshot => {
+        const mesa = snapshot.val() as Mesa | null;
+        if (mesa) {
+          // Elimina el producto del array
+          if (mesa.pedidoGeneral.productos && mesa.pedidoGeneral.productos.length > productoIndex) {
+            mesa.pedidoGeneral.total -= mesa.pedidoGeneral.productos[productoIndex].precio * mesa.pedidoGeneral.productos[productoIndex].cantidad;
+            mesa.pedidoGeneral.productos.splice(productoIndex, 1);
+
+            // Actualiza la base de datos
+            update(mesaRef, { pedidoGeneral: mesa.pedidoGeneral })
+              .then(() => resolve())
+              .catch(err => reject(err));
+          } else {
+            reject(new Error('Índice de producto no válido'));
+          }
+        } else {
+          reject(new Error('Mesa no encontrada'));
+        }
+      }, { onlyOnce: true });
+    });
   }
 }

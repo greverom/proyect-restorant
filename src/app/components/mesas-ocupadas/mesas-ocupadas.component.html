@@ -1,27 +1,50 @@
 <div class="ocupadas-container">
-    <h1>Mesas Ocupadas</h1>
-    
-    <div class="mesas-list">
-      <div *ngFor="let mesa of mesasOcupadas" class="mesa-card">
-        <h2>Mesa {{ mesa.numero }}</h2>
-        <button class="add-product-btn" (click)="navigateToMenu(mesa.id)">Agregar Producto</button>
-  
-        <div class="pedido-list">
-          <h3>Pedidos:</h3>
-          <ul>
-            <li *ngFor="let producto of mesa.pedidoGeneral.productos">
-              {{ producto.cantidad }}x {{ producto.nombre | titlecase }} - {{ producto.precio | currency }}
-            </li>
-          </ul>
+  <h1>Mesas Ocupadas</h1>
+
+  <div class="mesas-list">
+    <div *ngFor="let mesa of mesasOcupadas" class="mesa-card">
+      <h2>Mesa {{ mesa.numero }}</h2>
+      <button class="add-product-btn" (click)="navigateToMenu(mesa.id)">Agregar Producto</button>
+
+      <div class="pedido-list">
+        <h3>Pedidos:</h3>
+        <ul>
+          <li *ngFor="let producto of mesa.pedidoGeneral.productos; let i = index">
+            <input type="checkbox" 
+                   [checked]="productosSeleccionados[mesa.id].has(i)" 
+                   (change)="seleccionarProducto(mesa.id, i)" />
+            {{ producto.cantidad }}x {{ producto.nombre | titlecase }} - {{ producto.precio | currency }}
+            <button (click)="eliminarProducto(mesa.id, i)">X</button>
+          </li>
+        </ul>
+      </div>
+
+        <div>
+          <h3>Subtotal:</h3>
+          <p>{{ calcularSubtotal(mesa) | currency }}</p>
+
+          <h4>Propina (5%):</h4>
+          <p>{{ calcularPropina(mesa) | currency }}</p>
+
+          <h4>IVA (15%):</h4>
+          <p>{{ calcularIVA(mesa) | currency }}</p>
         </div>
+
         <div class="total">
           <h3>Total:</h3>
-          <p>{{ mesa.pedidoGeneral.total | currency }}</p>
-        </div>
-        <div class="mesa-card-buttons">
-          <button class="btn-pagar" (click)="pagarPedido(mesa.id)">Pagar</button>
-          <button class="btn-desocupar" (click)="desocuparMesa(mesa.id)">Desocupar</button>
-        </div>
+          <p>{{ calcularTotalConImpuestos(mesa) | currency }}</p>
+      </div>
+      <div class="mesa-card-buttons">
+        <button class="btn-pagar" 
+                (click)="mostrarOpcionesPago(mesa.id)"
+                [disabled]="mesa.pedidoGeneral.productos.length === 0">Pagar</button>
+        <button class="btn-desocupar" (click)="desocuparMesa(mesa.id)">Desocupar</button>
+      </div>
+
+      <div *ngIf="mesaMostrandoOpcionesPago === mesa.id && mesa.pedidoGeneral.productos.length > 0" class="opciones-pago">
+        <button (click)="procesarPago(mesa.id, true)">Con Factura</button>
+        <button class="btn-sin-factura" (click)="pagarSinFactura(mesa)">Sin Factura</button>
       </div>
     </div>
   </div>
+</div>

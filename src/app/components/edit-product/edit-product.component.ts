@@ -26,6 +26,7 @@ export class EditProductComponent implements OnInit {
 
 productosPorCategoria: { [key: string]: Alimento[] } = {};
 productoSeleccionado: Alimento | null = null;
+productoTemporal: Alimento | null = null;
 isModalOpen: boolean = false;
 
 selectedFile: File | null = null;  
@@ -47,12 +48,13 @@ previewUrl: string | null = null;
 
   abrirModal(producto: Alimento) {
     this.productoSeleccionado = producto;
+    this.productoTemporal = { ...producto };
     this.isModalOpen = true; 
   }
 
   cerrarModal() {
     this.isModalOpen = false;
-    this.productoSeleccionado = null;  
+    this.productoTemporal = null;  
     this.selectedFile = null;  
     this.previewUrl = null;  
   }
@@ -69,14 +71,15 @@ previewUrl: string | null = null;
   }
 
   guardarCambios() {
-    if (this.productoSeleccionado) {
-      if (this.selectedFile) {
+    if (this.productoSeleccionado && this.productoTemporal) {
 
+      Object.assign(this.productoSeleccionado, this.productoTemporal);
+
+      if (this.selectedFile) {
         this.alimentosService.actualizarAlimentoConImagen(this.productoSeleccionado, this.selectedFile)
           .then(() => this.cerrarModal())
           .catch(error => console.error('Error al guardar el producto:', error));
       } else {
-
         this.alimentosService.actualizarAlimento(this.productoSeleccionado.categoria, this.productoSeleccionado.id!, this.productoSeleccionado)
           .then(() => this.cerrarModal())
           .catch(error => console.error('Error al guardar el producto:', error));
