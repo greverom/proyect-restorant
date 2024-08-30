@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RollosDeCanelaComponent } from '../menu/rollos-de-canela/rollos-de-canela.component';
+import { Factura } from '../../models/pago';
 
 @Component({
   selector: 'app-mesas-ocupadas',
@@ -22,6 +23,20 @@ export class MesasOcupadasComponent implements OnInit {
   mesasOcupadas: Mesa[] = [];
   productosSeleccionados: { [mesaId: string]: Set<number> } = {};
   mesaMostrandoOpcionesPago: string | null = null;
+
+  mostrarModalFactura: boolean = false;
+  mesaSeleccionada!: Mesa;
+  factura: Factura = {
+    nombre: '',
+    cedulaRUC: '',
+    correo: '',
+    fecha: new Date(),
+    productos: [],
+    subtotal: 0,
+    iva: 0,
+    propina: 0,
+    total: 0
+  };
 
   constructor(private mesasService: MesasService,
               private router: Router
@@ -59,14 +74,12 @@ export class MesasOcupadasComponent implements OnInit {
     const productos = mesa.pedidoGeneral.productos;
 
     if (this.productosSeleccionados[mesa.id] && this.productosSeleccionados[mesa.id].size > 0) {
-      // Calcular subtotal solo para productos seleccionados
       this.productosSeleccionados[mesa.id].forEach(index => {
         if (productos[index]) {
           subtotal += productos[index].precio * productos[index].cantidad;
         }
       });
     } else {
-      // Calcular subtotal para todos los productos si no hay nada seleccionado
       productos.forEach(producto => {
         subtotal += producto.precio * producto.cantidad;
       });
@@ -97,12 +110,39 @@ export class MesasOcupadasComponent implements OnInit {
     this.mesaMostrandoOpcionesPago = mesaId;  
   }
 
-  procesarPago(mesaId: string, conFactura: boolean) {
-    const productosAPagar = Array.from(this.productosSeleccionados[mesaId] || []);
-    console.log('Procesando pago:', productosAPagar, conFactura ? 'Con Factura' : 'Sin Factura');
-
-    this.mesaMostrandoOpcionesPago = null;  
+  abrirModalFactura(mesa: Mesa) {
+    console.log('Intentando abrir el modal para la mesa:', mesa);
+    this.mesaSeleccionada = mesa;  // Asigna la mesa seleccionada para la factura
+    this.inicializarFactura(mesa);  // Calcula los detalles de la factura
+    this.mostrarModalFactura = true;  // Muestra el modal de factura
   }
+
+  inicializarFactura(mesa: Mesa) {
+    this.factura.productos = mesa.pedidoGeneral.productos.map(producto => ({
+      nombre: producto.nombre,
+      cantidad: producto.cantidad,
+      precioUnitario: producto.precio,
+      total: producto.precio * producto.cantidad
+    }));
+    this.calcularTotales();
+  }
+
+  calcularTotales() {
+    this.factura.subtotal = this.factura.productos.reduce((acc, prod) => acc + prod.total, 0);
+    this.factura.iva = this.factura.subtotal * 0.15;
+    this.factura.propina = this.factura.subtotal * 0.05;
+    this.factura.total = this.factura.subtotal + this.factura.iva + this.factura.propina;
+  }
+
+  cerrarModalFactura() {
+    this.mostrarModalFactura = false;
+  }
+
+  procesarPago(mesaId: string) {
+    // Encuentra la mesa seleccionada en la lista de mesas ocupadas
+    const mesa = this.mesasOcupadas.find(m => m.id === mesaId);
+
+}
 
   pagarSinFactura(mesa: Mesa) {
     const productosSeleccionados = Array.from(this.productosSeleccionados[mesa.id] || []);
@@ -134,6 +174,11 @@ export class MesasOcupadasComponent implements OnInit {
     }
 }
 
+realizarPagoConFactura() {
+  console.log('Procesando pago con factura para:', this.factura);
+  this.cerrarModalFactura();  
+}
+
   desocuparMesa(mesaId: string) {
     this.mesasService.cambiarEstadoMesa(mesaId, 'disponible', 0, '')
       .then(() => {
@@ -143,9 +188,6 @@ export class MesasOcupadasComponent implements OnInit {
       .catch(error => console.error('Error al desocupar la mesa:', error));
   }
 
-  marcarMesaComoPagada(mesaId: string) {
-
-  }
 
   eliminarProducto(mesaId: string, productoIndex: number) {
     this.mesasService.eliminarProductoDePedido(mesaId, productoIndex)
@@ -159,7 +201,10 @@ export class MesasOcupadasComponent implements OnInit {
       .catch(error => console.error('Error al eliminar el producto:', error));
   }
 
+
   navigateToMenu(mesaId: string) {
     this.router.navigate(['/menu-restorant'], { queryParams: { mesaId: mesaId } });
   }
+
+
 }

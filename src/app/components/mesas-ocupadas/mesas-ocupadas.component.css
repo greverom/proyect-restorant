@@ -103,3 +103,77 @@
   .btn-desocupar:hover {
     background-color: #c82333;
   }
+
+
+
+
+/* Centrar el título "Factura" */
+.modal-content h2 {
+  text-align: center;
+  font-size: 1.8rem; /* Ajusta el tamaño según prefieras */
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* Ajustar el espacio entre los inputs y el título "Detalles del Pedido" */
+.modal-content .form-group h3 {
+  margin-top: 30px; /* Aumenta el espacio encima del título "Detalles del Pedido" */
+  font-size: 1.5rem; /* Ajusta el tamaño del título "Detalles del Pedido" */
+  margin-bottom: 15px; /* Espacio debajo del título */
+}
+
+/* Ajustar el tamaño de fuente para los detalles de pago */
+.modal-content h4, .modal-content h3 {
+  font-size: 1rem; /* Reduce el tamaño de las etiquetas de subtotal, IVA, propina, y total */
+  margin-bottom: 10px; /* Agrega espacio entre los elementos */
+}
+
+/* Ajustar el tamaño de fuente para el total para que sea un poco más prominente */
+.modal-content h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+/* Alinear el total a la derecha y darle espacio */
+.modal-content .form-group h3.total {
+  text-align: right; /* Alinea el total a la derecha */
+  margin-top: 20px; /* Espacio arriba del total */
+  margin-bottom: 20px; /* Espacio abajo del total */
+}
+
+/* Ajuste adicional para otros detalles de pago */
+.modal-content .form-group h4,
+.modal-content .form-group h3 {
+  margin-top: 15px; /* Espacio arriba de los detalles */
+  margin-bottom: 10px; /* Espacio abajo de los detalles */
+}
+
+/* Asegurar que haya suficiente espacio entre los grupos de formularios */
+.modal-content .form-group {
+  margin-bottom: 15px; /* Ajusta el espacio entre los campos del formulario */
+}
+.modal-content .form-group ul {
+  margin-bottom: 25px; /* Aumenta el espacio debajo de la lista de productos */
+}
+
+/* Personalizar la apariencia del modal */
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid grey; /* Borde gris */
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 5px; /* Espacio entre el label y el input */
+}
+
+.modal-footer button {
+  margin-left: 10px; /* Espacio entre los botones en el footer */
+}
+
+
+
+

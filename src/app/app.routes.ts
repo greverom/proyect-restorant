@@ -8,7 +8,6 @@ import { MesasOcupadasComponent } from './components/mesas-ocupadas/mesas-ocupad
 
 
 
-
 export const routes: Route[] = [
   { path: 'comida-manager', component: ComidaManagerComponent },
   { path: 'edit-product', component: EditProductComponent },
@@ -17,7 +16,7 @@ export const routes: Route[] = [
     component: MenuRestorantComponent,
     children: menuRestorantRoutes  
   },
-  { path: 'mesas', component: MesasComponent },  // Asegúrate de que la ruta esté usando MesasComponent
+  { path: 'mesas', component: MesasComponent }, 
   { path: 'mesas-ocupadas', component: MesasOcupadasComponent },
   { path: '', redirectTo: 'comida-manager', pathMatch: 'full' },  
   { path: '**', redirectTo: 'comida-manager', pathMatch: 'full' }

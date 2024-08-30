@@ -19,31 +19,77 @@
         </ul>
       </div>
 
-        <div>
-          <h3>Subtotal:</h3>
-          <p>{{ calcularSubtotal(mesa) | currency }}</p>
+      <div>
+        <h3>Subtotal:</h3>
+        <p>{{ calcularSubtotal(mesa) | currency }}</p>
 
-          <h4>Propina (5%):</h4>
-          <p>{{ calcularPropina(mesa) | currency }}</p>
+        <h4>Propina (5%):</h4>
+        <p>{{ calcularPropina(mesa) | currency }}</p>
 
-          <h4>IVA (15%):</h4>
-          <p>{{ calcularIVA(mesa) | currency }}</p>
-        </div>
+        <h4>IVA (15%):</h4>
+        <p>{{ calcularIVA(mesa) | currency }}</p>
+      </div>
 
-        <div class="total">
-          <h3>Total:</h3>
-          <p>{{ calcularTotalConImpuestos(mesa) | currency }}</p>
+      <div class="total">
+        <h3>Total:</h3>
+        <p>{{ calcularTotalConImpuestos(mesa) | currency }}</p>
       </div>
       <div class="mesa-card-buttons">
         <button class="btn-pagar" 
                 (click)="mostrarOpcionesPago(mesa.id)"
-                [disabled]="mesa.pedidoGeneral.productos.length === 0">Pagar</button>
+                [disabled]="mesa.pedidoGeneral.productos.length === 0">Proceder a pagar</button>
         <button class="btn-desocupar" (click)="desocuparMesa(mesa.id)">Desocupar</button>
       </div>
 
       <div *ngIf="mesaMostrandoOpcionesPago === mesa.id && mesa.pedidoGeneral.productos.length > 0" class="opciones-pago">
-        <button (click)="procesarPago(mesa.id, true)">Con Factura</button>
+        <button (click)="abrirModalFactura(mesa)" data-bs-toggle="modal" data-bs-target="#facturaModal">Con Factura</button>
         <button class="btn-sin-factura" (click)="pagarSinFactura(mesa)">Sin Factura</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Factura Bootstrap -->
+  <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="facturaModalLabel">Factura</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="realizarPagoConFactura()">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" [(ngModel)]="factura.nombre" name="nombre" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cedulaRUC">Cédula o RUC</label>
+              <input type="text" id="cedulaRUC" [(ngModel)]="factura.cedulaRUC" name="cedulaRUC" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input type="email" id="correo" [(ngModel)]="factura.correo" name="correo" required class="form-control">
+            </div>
+            <div class="form-group">
+              <h3>Detalles del Pedido</h3>
+              <ul>
+                <li *ngFor="let producto of factura.productos">
+                  {{ producto.cantidad }}x {{ producto.nombre }} - {{ producto.total | currency }}
+                </li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <h4>Subtotal: {{ factura.subtotal | currency }}</h4>
+              <h4>IVA (15%): {{ factura.iva | currency }}</h4>
+              <h4>Propina (5%): {{ factura.propina | currency }}</h4>
+              <h3>Total: {{ factura.total | currency }}</h3>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Pagar con Factura</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
